@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love 🌸✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for romantic & floral icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display for headers & Quicksand for cute body text -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rose-petal': '#ffe6ea',
+                        'blush-pink': '#ffb6c1',
+                        'deep-rose': '#e91e63',
+                        'soft-cream': '#fffafb',
+                        'lily-pink': '#f48fb1',
+                        'lily-center': '#fbcfe8',
+                        'romantic-dark': '#4a1525',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        cursive: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Quicksand"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe4e8 35%, #fbcfe8 70%, #ffe6ea 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            box-shadow: 0 20px 50px rgba(233, 30, 99, 0.12);
+        }
+
+        /* Floating Petals Animation */
+        .petal {
+            position: fixed;
+            top: -10%;
+            pointer-events: none;
+            z-index: 50;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0vh) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) scale(1.2);
+                opacity: 0.2;
+            }
+        }
+
+        /* Glowing Heart Particle */
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 2.5s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(0.6) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.4) rotate(45deg); }
+        }
+
+        /* Lily Frame Ring */
+        .lily-ring-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lily-wreath {
+            position: absolute;
+            width: 108%;
+            height: 108%;
+            top: -4%;
+            left: -4%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Pulse glow for buttons */
+        .glow-btn {
+            box-shadow: 0 0 20px rgba(244, 143, 177, 0.6);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glow-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 0 30px rgba(233, 30, 99, 0.8);
+        }
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ffe6ea;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f48fb1;
+            border-radius: 10px;
+        }
+
+        .flower-bounce {
+            animation: gentleBounce 3s infinite ease-in-out;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body class="text-romantic-dark selection:bg-pink-200">
+
+    <div id="petal-container" class="fixed inset-0 pointer-events-none z-40 overflow-hidden"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-3 flex justify-between items-center bg-white/40 backdrop-blur-md border-b border-pink-200/50">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl text-pink-500 animate-pulse"><i class="fa-solid font-bold fa-heart"></i></span>
+            <span class="font-cursive text-2xl font-bold text-pink-600 tracking-wide">For My Adorable Baby</span>
+        </div>
+        
+        <!-- Music Control & Page Switcher -->
+        <div class="flex items-center space-x-3">
+            <button id="music-btn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-full bg-pink-100 border border-pink-300 text-pink-700 text-xs sm:text-sm font-semibold flex items-center space-x-2 hover:bg-pink-200 transition">
+                <i id="music-icon" class="fa-solid fa-music text-pink-500"></i>
+                <span id="music-text">Play Romantic Tune</span>
+            </button>
+            <div class="flex bg-pink-100/80 p-1 rounded-full border border-pink-200">
+                <button id="nav-p1" onclick="switchPage('page1')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-pink-500 text-white shadow-md transition-all duration-300">
+                    <i class="fa-solid fa-envelope-open-text mr-1"></i> My Love
+                </button>
+                <button id="nav-p2" onclick="switchPage('page2')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-pink-700 hover:text-pink-900 transition-all duration-300">
+                    <i class="fa-solid fa-cake-candles mr-1"></i> Birthday Wish 🌸
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative pt-20 pb-12 px-4 min-h-screen flex items-center justify-center">
+
+        <!-- ================= PAGE 1: EXPRESSION OF DEEP LOVE ================= -->
+        <section id="page1" class="w-full max-w-4xl transition-all duration-700 opacity-100 transform translate-x-0">
+            <div class="glass-card rounded-3xl p-6 md:p-10 text-center relative overflow-hidden">
+                
+                <!-- Floral Corner Accents (Pink & White Lilies) -->
+                <div class="absolute -top-6 -left-6 w-24 h-24 sm:w-32 sm:h-32 pointer-events-none opacity-80 flower-bounce">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <!-- Lily petals white/pink -->
+                        <path d="M50,50 Q20,10 10,40 Q30,60 50,50" fill="#fff0f5" stroke="#f48fb1" stroke-width="2"/>
+                        <path d="M50,50 Q10,20 40,10 Q60,30 50,50" fill="#ffffff" stroke="#f48fb1" stroke-width="2"/>
+                        <path d="M50,50 Q60,10 80,30 Q60,60 50,50" fill="#ffe6ea" stroke="#f48fb1" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="6" fill="#fbcfe8"/>
+                    </svg>
+                </div>
+                <div class="absolute -bottom-6 -right-6 w-24 h-24 sm:w-32 sm:h-32 pointer-events-none opacity-80 flower-bounce" style="animation-delay: 1.5s;">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <path d="M50,50 Q80,90 90,60 Q70,40 50,50" fill="#fff0f5" stroke="#f48fb1" stroke-width="2"/>
+                        <path d="M50,50 Q90,80 60,90 Q40,70 50,50" fill="#ffffff" stroke="#f48fb1" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="6" fill="#fbcfe8"/>
+                    </svg>
+                </div>
+
+                <!-- Cute Badge -->
+                <div class="inline-flex items-center space-x-2 bg-pink-100/90 text-pink-600 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-pink-300/60 mb-6 shadow-sm">
+                    <span>✨ To the most adorable girl in the world ✨</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-pink-700 leading-tight mb-4 tracking-tight">
+                    Every Second With You Is Pure Magic 🌸
+                </h1>
+
+                <!-- Cute Decorative Subtitle -->
+                <p class="font-cursive text-2xl sm:text-3xl text-pink-500 mb-8">
+                    My Love, My Heart, My Entire World...MY IVY!!
+                </p>
+
+                <!-- Expressive Love Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 text-left">
+                    <div class="bg-white/70 p-6 rounded-2xl border border-pink-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 mb-3 text-lg">
+                            <i class="fa-solid fa-infinity"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-pink-800 mb-2">I Want You In Every Moment</h3>
+                        <p class="text-xs sm:text-sm text-pink-900/80 leading-relaxed">
+                            I want to spend every sunrise, every quiet night, and every single second of my life right by your side. You are the sweetest part of my day, my favorite thought, and my forever dream come true.
+                        </p>
+                    </div>
+
+                    <div class="bg-white/70 p-6 rounded-2xl border border-pink-200/80 shadow-sm hover:shadow-md transition">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 mb-3 text-lg">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-pink-800 mb-2">Making You Mine Forever</h3>
+                        <p class="text-xs sm:text-sm text-pink-900/80 leading-relaxed">
+                            Holding your hand, listening to your cute giggles, and surrounding you with endless care is all I ever want. I hold you so deep in my heart, and I promise to love and cherish you unconditionally.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Love Tokens / Popups -->
+                <div class="my-8 p-6 bg-gradient-to-r from-pink-50/80 via-white/90 to-pink-50/80 rounded-2xl border border-pink-200 shadow-inner">
+                    <p class="font-bold text-pink-700 text-sm sm:text-base mb-4">
+                        💖 Tap a sweet lily promise to open my heart:
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button onclick="showLoveNote('care')" class="bg-white text-pink-600 border border-pink-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-pink-500 hover:text-white transition duration-300 shadow-sm">
+                            🌸 Endless Care & Devotion
+                        </button>
+                        <button onclick="showLoveNote('forever')" class="bg-white text-pink-600 border border-pink-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-pink-500 hover:text-white transition duration-300 shadow-sm">
+                            ✨ Always By Your Side
+                        </button>
+                        <button onclick="showLoveNote('cute')" class="bg-white text-pink-600 border border-pink-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold hover:bg-pink-500 hover:text-white transition duration-300 shadow-sm">
+                            💕 My Adorable Angel
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Love Message Box -->
+                    <div id="love-note-display" class="mt-4 p-4 bg-pink-100/70 rounded-xl text-pink-800 text-xs sm:text-sm italic hidden transition-all duration-300 border border-pink-300/50">
+                    </div>
+                </div>
+
+                <!-- Call to Action to Next Page -->
+                <div class="pt-4">
+                    <button onclick="switchPage('page2')" class="glow-btn bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg inline-flex items-center space-x-2">
+                        <span>Open Your Birthday Celebration Page</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: SLIDING BIRTHDAY CARD WITH LILY FRAME ================= -->
+        <section id="page2" class="w-full max-w-4xl transition-all duration-700 opacity-0 transform translate-x-full hidden">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 text-center relative">
+                
+                <!-- Central Ring of White and Pink Lilies Framing the Card -->
+                <div class="relative py-8 px-4 sm:px-8 border-4 border-dashed border-pink-300/70 rounded-3xl bg-white/60">
+                    
+                    <!-- Decorative Floating Flowers around the Center Ring -->
+                    <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white px-4 py-1 rounded-full border border-pink-300 shadow-sm text-pink-500 font-serif text-sm font-bold flex items-center space-x-2">
+                        <span>🌸</span>
+                        <span>Pink & White Lily Garden</span>
+                        <span>🌸</span>
+                    </div>
+
+                    <!-- Top Left Lily -->
+                    <div class="absolute -top-6 -left-6 text-3xl sm:text-4xl flower-bounce">🌸</div>
+                    <!-- Top Right Lily -->
+                    <div class="absolute -top-6 -right-6 text-3xl sm:text-4xl flower-bounce" style="animation-delay: 0.8s;">🌺</div>
+                    <!-- Bottom Left Lily -->
+                    <div class="absolute -bottom-6 -left-6 text-3xl sm:text-4xl flower-bounce" style="animation-delay: 1.2s;">🌺</div>
+                    <!-- Bottom Right Lily -->
+                    <div class="absolute -bottom-6 -right-6 text-3xl sm:text-4xl flower-bounce" style="animation-delay: 1.8s;">🌸</div>
+
+                    <!-- Main Birthday Wish Header -->
+                    <div class="my-2">
+                        <span class="text-xs uppercase tracking-widest text-pink-500 font-bold bg-pink-100 px-3 py-1 rounded-full">Special Birthday Edition</span>
+                        <h2 class="font-cursive text-4xl sm:text-6xl font-bold text-pink-600 mt-3 mb-2">
+                            Happy Birthday My Baby! 🌸✨
+                        </h2>
+                        <p class="font-serif italic text-pink-800 text-lg sm:text-xl">
+                            To the sweetest, most adorable girl who holds my heart forever
+                        </p>
+                    </div>
+
+                    <!-- Romantic Birthday Expressive Letter -->
+                    <div class="my-6 max-w-2xl mx-auto bg-pink-50/80 p-6 rounded-2xl border border-pink-200 text-left shadow-inner">
+                        <p class="text-xs sm:text-sm text-pink-900 leading-relaxed mb-3">
+                            <span class="font-bold text-pink-600 text-base">My Dearest Baby Girl,</span>
+                        </p>
+                        <p class="text-xs sm:text-sm text-pink-900 leading-relaxed mb-3">
+                            Today is all about celebrating <strong>YOU</strong>—the brightest, cutest, and most wonderful person in my life! I wish you endless happiness, beautiful smiles, and a year filled with pure joy.
+                        </p>
+                        <p class="text-xs sm:text-sm text-pink-900 leading-relaxed mb-3">
+                            I want you to know that <strong>I would do everything in the world for you</strong>. Whatever brings a smile to your adorable face, I am here to make it happen. I love you with all my heart and soul, today and for all the birthdays to come!
+                        </p>
+                        <div class="text-right font-cursive text-xl text-pink-600 font-bold mt-4">
+                            ~ Forever Yours & Devoted 💕
+                        </div>
+                    </div>
+
+                    <!-- Interactive Birthday Flower Boxes & Surprises -->
+                    <div class="my-6">
+                        <h3 class="font-serif text-md font-bold text-pink-700 mb-3">
+                            🎁 Tap Your Birthday Flower Boxes to Reveal Sweet Surprises:
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            
+                            <!-- Box 1 -->
+                            <div onclick="openSurpriseBox(1)" id="box-1" class="cursor-pointer bg-white p-4 rounded-2xl border-2 border-pink-300 hover:border-pink-500 hover:shadow-md transition text-center group">
+                                <div class="text-3xl mb-1 group-hover:scale-110 transition transform">🎁</div>
+                                <div class="font-bold text-xs text-pink-600">Surprise #1</div>
+                                <div class="text-[10px] text-pink-400">Tap to unwrap</div>
+                            </div>
+
+                            <!-- Box 2 -->
+                            <div onclick="openSurpriseBox(2)" id="box-2" class="cursor-pointer bg-white p-4 rounded-2xl border-2 border-pink-300 hover:border-pink-500 hover:shadow-md transition text-center group">
+                                <div class="text-3xl mb-1 group-hover:scale-110 transition transform">🌸</div>
+                                <div class="font-bold text-xs text-pink-600">Surprise #2</div>
+                                <div class="text-[10px] text-pink-400">Tap to unwrap</div>
+                            </div>
+
+                            <!-- Box 3 -->
+                            <div onclick="openSurpriseBox(3)" id="box-3" class="cursor-pointer bg-white p-4 rounded-2xl border-2 border-pink-300 hover:border-pink-500 hover:shadow-md transition text-center group">
+                                <div class="text-3xl mb-1 group-hover:scale-110 transition transform">💖</div>
+                                <div class="font-bold text-xs text-pink-600">Surprise #3</div>
+                                <div class="text-[10px] text-pink-400">Tap to unwrap</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Interactive Buttons for Flower Shower & Sparkles -->
+                    <div class="flex flex-wrap justify-center gap-4 pt-4">
+                        <button onclick="triggerLilyShower()" class="glow-btn bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-full shadow-md flex items-center space-x-2">
+                            <span>🌸 Send Lily Petals Shower</span>
+                        </button>
+                        <button onclick="triggerLoveBurst(event)" class="glow-btn bg-rose-500 hover:bg-rose-600 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-full shadow-md flex items-center space-x-2">
+                            <span>💖 Send Hearts Burst</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Back Navigation -->
+                <div class="mt-6 text-center">
+                    <button onclick="switchPage('page1')" class="text-pink-600 hover:text-pink-800 text-xs sm:text-sm font-semibold underline underline-offset-4 transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Return to Love Express Page
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Popup for Box Surprises -->
+    <div id="surprise-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-card bg-white/95 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative border-2 border-pink-300 shadow-2xl transform scale-90 transition-all duration-300" id="modal-card">
+            <button onclick="closeModal()" class="absolute top-3 right-4 text-pink-400 hover:text-pink-700 text-xl font-bold">&times;</button>
+            <div id="modal-icon" class="text-5xl mb-3">🌸</div>
+            <h3 id="modal-title" class="font-serif text-xl font-bold text-pink-700 mb-2">My Promise</h3>
+            <p id="modal-body" class="text-xs sm:text-sm text-pink-900/90 leading-relaxed mb-6">Message contents...</p>
+            <button onclick="closeModal()" class="bg-pink-500 text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-md hover:bg-pink-600 transition">
+                Sweet & Cute! 💕
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- PAGE SWITCHING LOGIC ---
+        function switchPage(pageId) {
+            const p1 = document.getElementById('page1');
+            const p2 = document.getElementById('page2');
+            const navP1 = document.getElementById('nav-p1');
+            const navP2 = document.getElementById('nav-p2');
+
+            if (pageId === 'page1') {
+                p2.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => {
+                    p2.classList.add('hidden');
+                    p1.classList.remove('hidden');
+                    setTimeout(() => {
+                        p1.classList.remove('opacity-0', '-translate-x-full');
+                        p1.classList.add('opacity-100', 'translate-x-0');
+                    }, 50);
+                }, 300);
+
+                navP1.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-pink-500 text-white shadow-md transition-all duration-300";
+                navP2.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-pink-700 hover:text-pink-900 transition-all duration-300";
+            } else {
+                p1.classList.add('opacity-0', '-translate-x-full');
+                setTimeout(() => {
+                    p1.classList.add('hidden');
+                    p2.classList.remove('hidden');
+                    setTimeout(() => {
+                        p2.classList.remove('opacity-0', 'translate-x-full');
+                        p2.classList.add('opacity-100', 'translate-x-0');
+                    }, 50);
+                }, 300);
+
+                navP2.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-pink-500 text-white shadow-md transition-all duration-300";
+                navP1.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold text-pink-700 hover:text-pink-900 transition-all duration-300";
+            }
+        }
+
+        // --- FLOATING PETALS GENERATOR ---
+        function createPetal() {
+            const container = document.getElementById('petal-container');
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            // Randomize between white and pink lily petal styles
+            const isPink = Math.random() > 0.4;
+            const size = Math.random() * 16 + 12; // 12px to 28px
+            
+            petal.innerHTML = isPink ? '🌸' : '🌺';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = `${size}px`;
+            petal.style.animationDuration = (Math.random() * 4 + 6) + 's'; // 6s - 10s
+            
+            container.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+
+        setInterval(createPetal, 450);
+
+        // --- INTERACTIVE LOVE NOTE MESSAGES ---
+        function showLoveNote(type) {
+            const display = document.getElementById('love-note-display');
+            display.classList.remove('hidden');
+
+            let noteText = "";
+            if (type === 'care') {
+                noteText = "🌸 \"My baby, caring for you and making sure you feel cherished every single day is my highest priority. You deserve all the sweetness in the universe!\"";
+            } else if (type === 'forever') {
+                noteText = "✨ \"I want to walk with you through every milestone, hold your hand during quiet moments, and make memories that last forever and ever.\"";
+            } else if (type === 'cute') {
+                noteText = "💕 \"You are the most adorable person in the entire world! Every time you smile, my heart skips a beat. Never forget how loved you are!\"";
+            }
+
+            display.innerHTML = noteText;
+        }
+
+        // --- SURPRISE BOX MODAL LOGIC ---
+        function openSurpriseBox(boxNum) {
+            const modal = document.getElementById('surprise-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            const icon = document.getElementById('modal-icon');
+
+            if (boxNum === 1) {
+                icon.innerHTML = "🎁";
+                title.innerText = "Unlimited Love & Care";
+                body.innerText = "Coupon for endless hugs, sweet love notes, and doing everything possible to bring a bright smile to your cute face!";
+            } else if (boxNum === 2) {
+                icon.innerHTML = "🌸";
+                title.innerText = "Lily Bouquet Promise";
+                body.innerText = "A promise to always keep your life filled with your favorite white and pink lilies, sweetness, and everlasting warmth.";
+            } else if (boxNum === 3) {
+                icon.innerHTML = "👑";
+                title.innerText = "My Queen & Baby";
+                body.innerText = "I want to spend every moment of my life making you happy, holding you close, and building the sweetest future together!";
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('surprise-modal').classList.add('hidden');
+        }
+
+        // --- FLOWER SHOWER & SPARKLE BURST EFFECTS ---
+        function triggerLilyShower() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createPetal, i * 80);
+            }
+        }
+
+        function triggerLoveBurst(event) {
+            const count = 15;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle font-bold text-pink-500';
+                sparkle.innerHTML = ['💖', '✨', '🌸', '💕'][Math.floor(Math.random() * 4)];
+                sparkle.style.left = (event.clientX + (Math.random() * 100 - 50)) + 'px';
+                sparkle.style.top = (event.clientY + (Math.random() * 100 - 50)) + 'px';
+                sparkle.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => sparkle.remove(), 2500);
+            }
+        }
+
+        // --- ROMANTIC BACKGROUND SYNTH MUSIC (TONE GENERATOR) ---
+        let audioCtx = null;
+        let isPlaying = false;
+        let timer = null;
+
+        function toggleAudio() {
+            const btnText = document.getElementById('music-text');
+            const btnIcon = document.getElementById('music-icon');
+
+            if (!isPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                audioCtx.resume();
+                isPlaying = true;
+                btnText.innerText = "Pause Music";
+                btnIcon.className = "fa-solid fa-pause text-pink-600";
+                playRomanticMelody();
+            } else {
+                isPlaying = false;
+                btnText.innerText = "Play Romantic Tune";
+                btnIcon.className = "fa-solid fa-music text-pink-500";
+                if (timer) clearTimeout(timer);
+            }
+        }
+
+        function playRomanticMelody() {
+            if (!isPlaying) return;
+
+            const notes = [261.63, 329.63, 392.00, 440.00, 392.00, 329.63, 293.66, 349.23, 392.00]; // Soft romantic chord notes
+            let index = 0;
+
+            function playNext() {
+                if (!isPlaying) return;
+                
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(notes[index], audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+
+                index = (index + 1) % notes.length;
+                timer = setTimeout(playNext, 600);
+            }
+
+            playNext();
+        }
+    </script>
+</body>
+</html>
